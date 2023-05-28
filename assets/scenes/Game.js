@@ -1,50 +1,72 @@
+const config = {
+  width: 800,
+  height: 600
+};
+
 export default class Game extends Phaser.Scene {
   constructor() {
     super("Game");
   }
 
   init() {
-    let shaperscolected = [
-      { type: "Triangulo", count: 0 },
-      { type: "Cuadrado", count: 0 },
-      { type: "Rombo", count: 0 },
-    ];
+
   }
 
   preload() {
-    //cargar fondo, plataformas, formas, jugador
-    this.load.image("sky", "./assets/images/Cielo.png");
-    this.load.image("ninja", "./assets/images/Ninja.png");
-    this.load.image("Platform", "./assets/images/platform.png");
-    this.load.image("Triangulo", "./assets/images/Triangulo.png");
+    // Cargar los recursos necesarios
+    this.load.image("sky", "public/images/sky.jpg");
+    this.load.image("ground", "public/images/ground.jpg");
+    this.load.image("PJPrin", "public/images/PJPrin.png");
   }
 
   create() {
-    //agregado sin fisica
-    this.add.image(400, 300, "sky").setScale(0.555);
-    //this.add.image(200, 550, "ninja");
-    //this.add.image(400, 500, "Platform");
+    // Caida y tiempo
+    const totalFallTime = 5000; // Duración de caida
+    const startTime = this.time.now;
+    this.totalFallTime = totalFallTime;
+    this.startTime = startTime;
 
-    //agregando fisicas
-    this.ninja = this.physics.add.sprite(150, 500, "ninja");
-    this.platformsGroup = this.physics.add.staticGroup();
-    this.platformsGroup.create(400, 570, "Platform").setScale(2).refreshBody();
-    this.physics.add.collider(this.ninja, this.platformsGroup);
+    // Background sky
+    const sky = this.add.image(0, 0, "sky").setOrigin(0).setName("sky");
+    sky.setDisplaySize(config.width, config.height);
+    sky.setScrollFactor(0);
 
-    this.shapeGroup = this.physics.add.group();
-    this.shapeGroup.create(150, 0, "Triangulo");
-    this.physics.add.collider(this.shapeGroup, this.platformsGroup);
+    // Background ground
+    const ground = this.add.image(0, config.height, "ground").setOrigin(0).setName("ground");
+    ground.setDisplaySize(config.width, config.height);
+    ground.setScrollFactor(0);
+    ground.setVisible(false);
 
-    this.physics.add.overlap(this.ninja, this.shapeGroup, this.collectShape);
-    null; //dejar fijo por ahora
-    null; //dejar fijo por ahora
-    // this.platform.create(500, 400, "Platform");
+    // Sprites
+    const player = this.physics.add.sprite(400, 300, "PJPrin").setScale(0.2);
+
+    const obstacles = this.physics.add.group();
+
+    this.cameras.main.setBounds(0, 0, config.width, config.height);
+    this.cameras.main.setFollowOffset(0, -config.height / 2);
   }
 
-  update() {}
+  update() {
+    // Calcula el desplazamiento del fondo de suelo basado en el tiempo transcurrido
+    const elapsedTime = this.time.now - this.startTime;
+    const totalFallTime = this.totalFallTime;
+    const groundOffsetY = (config.height * elapsedTime) / totalFallTime;
+    const skyOffsetY = groundOffsetY / 2;
 
-  collectShape(ninja, figuraChocada) {
-    console.log("Figura Recolectada");
-    figuraChocada.disableBody(true, true);
+    // Actualiza las posiciones de los fondos de cielo y suelo
+    const sky = this.children.getByName("sky");
+    if (sky) {
+      sky.y = -skyOffsetY;
+    }
+
+    const ground = this.children.getByName("ground");
+    if (ground) {
+      ground.y = config.height - groundOffsetY;
+    }
+
+    const player = this.children.getByName("player");
+    if (player) {
+      this.cameras.main.scrollY = player.y - config.height / 2;
+    }
   }
 }
