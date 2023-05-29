@@ -2,6 +2,12 @@ const config = {
   width: 800,
   height: 600
 };
+import {
+  SHAPES,
+  TRIANGULO,
+  CUADRADO,
+  ROMBO,
+} from "../scenes/util.js";
 
 export default class Game extends Phaser.Scene {
   constructor() {
@@ -41,6 +47,19 @@ export default class Game extends Phaser.Scene {
     this.cameras.main.followOffset.y = -config.height / 2;
 
     this.player = player;
+
+    /*shapes SOLUCIONAR
+    const dron = this.add.sprite(100, 100, "dron");
+    dron.setVisible(true);
+    console.log("Se creó el dron: ", dron.x, dron.y, dron.width, dron.height, dron.anims.currentAnim.key);
+    this.anims.create({
+      key: "dron_anim",
+      frames: this.anims.generateFrameNumbers("dron"),
+      frameRate: 8,
+      repeat: -1
+    });
+    dron.play("dron_anim");
+    */
   }
 
   update() {

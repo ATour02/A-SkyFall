@@ -15,7 +15,10 @@ export default class PreLoad extends Phaser.Scene {
     this.load.image("PJPrin", "./public/images/PJPrin.png");
 
     //obstacles
-    
+    this.load.spritesheet("dron", "./public/images/dron.png",{
+      frameWidth: 27,
+      frameHeight: 14
+    });
     }
     create() {
 
