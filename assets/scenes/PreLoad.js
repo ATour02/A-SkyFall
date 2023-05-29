@@ -9,7 +9,7 @@ export default class PreLoad extends Phaser.Scene {
     preload() {
     //background
     this.load.image("sky", "./public/images/sky.jpg");
-    this.load.image("ground", "./public/images/ground.jpg");
+    this.load.image("ground", "./public/images/ground.png");
 
     //change for spritesheet pjPrin
     this.load.image("PJPrin", "./public/images/PJPrin.png");
