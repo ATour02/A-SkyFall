@@ -57,7 +57,15 @@ export default class Game extends Phaser.Scene {
     if (this.sky.y <= -570) {
       this.ground.setVisible(true);
       this.sky.y = -600;
-
+      // Animar el movimiento vertical del jugador
+      this.tweens.add({
+        targets: this.player,
+        y: 482, // Posición final en el eje Y
+        duration: 900, // Duración de la animación en milisegundos
+        ease: "Linear", // Función de interpolación lineal
+        yoyo: false, // Repetir la animación de ida y vuelta
+        repeat: 0 // Número de repeticiones (0 para infinito)
+      })
       // Detener el movimiento vertical
     }
   }
