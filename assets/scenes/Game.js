@@ -13,6 +13,8 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    // input
+    this.cursors = this.input.keyboard.createCursorKeys();
     // Caida y tiempo
     const totalFallTime = 5000; // Duración de caida
     const startTime = this.time.now;
@@ -31,7 +33,7 @@ export default class Game extends Phaser.Scene {
     this.ground.setVisible(false)
 
     // Sprites
-    const player = this.add.image(400, 150, "PJPrin").setScale(0.25);
+    const player = this.physics.add.image(400, 150, "PJPrin").setScale(0.25);
 
     const obstacles = this.physics.add.group();
 
@@ -44,6 +46,15 @@ export default class Game extends Phaser.Scene {
   }
 
   update() {
+    //mov
+    if (this.cursors.left.isDown) {
+      this.player.setVelocityX(-200);
+    } else if (this.cursors.right.isDown) {
+      this.player.setVelocityX(200);
+    } else {
+      this.player.setVelocityX(0);
+    }
+
     // Calcula el desplazamiento del fondo de suelo basado en el tiempo transcurrido
     const elapsedTime = this.time.now - this.startTime;
     const totalFallTime = this.totalFallTime;
