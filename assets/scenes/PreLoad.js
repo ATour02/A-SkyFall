@@ -10,6 +10,7 @@ export default class PreLoad extends Phaser.Scene {
     //background
     this.load.image("sky", "./public/images/sky.jpg");
     this.load.image("ground", "./public/images/ground.png");
+    this.load.image("dron", "./public/images/dron.png");
 
     //change for spritesheet pjPrin
     this.load.image("PJPrin", "./public/images/PJPrin.png");
@@ -18,7 +19,12 @@ export default class PreLoad extends Phaser.Scene {
     
     }
     create() {
-
+      /* this.anims.create({
+        key: "dron",
+        frames: this.anims.generateFrameNumbers("dron", { start: 0, end: 1 }),
+        frameRate: 10,
+        repeat: -1,
+      }); */
         // init scene Menú
         this.scene.start("Game");
     }

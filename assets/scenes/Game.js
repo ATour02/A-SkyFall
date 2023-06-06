@@ -9,7 +9,7 @@ export default class Game extends Phaser.Scene {
   }
 
   init() {
-
+    this.isWinner = false;
   }
 
   create() {
@@ -29,11 +29,11 @@ export default class Game extends Phaser.Scene {
 
     // Background ground
     this.ground = 
-      this.add.image(120, 580, "ground").setScale(1)
+    this.add.image(120, 580, "ground").setScale(1);
     this.ground.setVisible(false)
 
     // Sprites
-    const player = this.physics.add.image(400, 150, "PJPrin").setScale(0.25);
+    const player = this.physics.add.image(400, 150, "PJPrin").setScale(0.22);
 
     const obstacles = this.physics.add.group();
 
@@ -43,18 +43,28 @@ export default class Game extends Phaser.Scene {
     this.cameras.main.followOffset.y = -config.height / 2;
 
     this.player = player;
+
+    // obstacles
+
+    const dron = this.physics.add.image(120, 550, "dron").setScale(0.17);
+    this.dron = dron;
   }
 
   update() {
+    if (this.isWinner) {
+      this.scene.start("Next");
+    }
     //mov
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-200);
+      this.player.setVelocityX(-300);
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(200);
+      this.player.setVelocityX(300);
     } else {
       this.player.setVelocityX(0);
     }
 
+    //mov obstacles
+   this.dron.setVelocityY(-160);
     // Calcula el desplazamiento del fondo de suelo basado en el tiempo transcurrido
     const elapsedTime = this.time.now - this.startTime;
     const totalFallTime = this.totalFallTime;
@@ -71,7 +81,7 @@ export default class Game extends Phaser.Scene {
       // Animar el movimiento vertical del jugador
       this.tweens.add({
         targets: this.player,
-        y: 482, // Posición final en el eje Y
+        y: 492, // Posición final en el eje Y
         duration: 900, // Duración de la animación en milisegundos
         ease: "Linear", // Función de interpolación lineal
         yoyo: false, // Repetir la animación de ida y vuelta
