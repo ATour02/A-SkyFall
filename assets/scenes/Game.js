@@ -69,7 +69,7 @@ export default class Game extends Phaser.Scene {
     const elapsedTime = this.time.now - this.startTime;
     const totalFallTime = this.totalFallTime;
     const groundOffsetY = (config.height * elapsedTime) / totalFallTime;
-    const skyOffsetY = groundOffsetY / 2;
+    const skyOffsetY = groundOffsetY / 9;
     // Actualiza las posiciones de los fondos de cielo y suelo
     this.sky.y = -skyOffsetY;
     console.log(this.sky.y)
