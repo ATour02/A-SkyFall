@@ -7,6 +7,7 @@ export default class PreLoad extends Phaser.Scene {
     }
     
     preload() {
+      //menu
     //background
     this.load.image("sky", "./public/images/sky.jpg");
     this.load.image("ground", "./public/images/ground.png");
@@ -26,6 +27,6 @@ export default class PreLoad extends Phaser.Scene {
         repeat: -1,
       }); */
         // init scene Menú
-        this.scene.start("Game");
+        this.scene.start("PrincipalMenu");
     }
 }
