@@ -48,7 +48,7 @@ helpButton.on("pointerout", () => {
   helpButton.clearTint();
 });
         helpButton.on("pointerup", () => {
-            this.scene.start("Game");
+            this.scene.start("Select");
         })
 
 creditsButton.on("pointerout", () => {

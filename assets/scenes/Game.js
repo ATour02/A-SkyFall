@@ -33,7 +33,7 @@ export default class Game extends Phaser.Scene {
     this.ground.setVisible(false)
 
     // Sprites
-    const player = this.physics.add.image(400, 150, "PJPrin").setScale(0.22);
+    const player = this.physics.add.image(400, 150, "PJPrin").setScale(0.20);
 
     const obstacles = this.physics.add.group();
 
@@ -48,6 +48,15 @@ export default class Game extends Phaser.Scene {
 
     const dron = this.physics.add.image(120, 550, "dron").setScale(0.17);
     this.dron = dron;
+
+    // colliders
+    this.physics.add.collider(this.player, this.dron);
+    this.physics.add.overlap(
+      this.player,
+      this.dron,
+      null,
+      this
+    );
   }
 
   update() {
@@ -89,5 +98,7 @@ export default class Game extends Phaser.Scene {
       })
       // Detener el movimiento vertical
     }
-  }
+
+    //testing dron
+}
 }
