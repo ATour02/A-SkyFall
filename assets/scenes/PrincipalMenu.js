@@ -29,6 +29,12 @@ export default class PrincipalMenu extends Phaser.Scene {
 helpButton.setTint(0x0000ff);
 });
 
+const creditsButton = this.add.image(390,460,"botonCredits").setScale(0.3).setInteractive();
+    creditsButton.on("pointerover", () => {
+
+creditsButton.setTint(0x0000ff);
+});
+
 startButton.on("pointerout", () => {
   
   startButton.clearTint();
@@ -44,5 +50,13 @@ helpButton.on("pointerout", () => {
         helpButton.on("pointerup", () => {
             this.scene.start("Game");
         })
+
+creditsButton.on("pointerout", () => {
+  
+  creditsButton.clearTint();
+        });
+        creditsButton.on("pointerup", () => {
+              this.scene.start("Game");
+              })
    }  
 }  
