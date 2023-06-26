@@ -9,11 +9,24 @@ export default class Select extends Phaser.Scene {
   
     preload() {
       this.load.image("select","./public/images/select.jpg");
+      this.load.image("back","./public/images/optBackSel.png");
     }
   
     create() {
-      
+      this.add.image(400,300,"fondoMenu").setScale(0.45);
       this.add.image(400,300,"select").setScale(0.5);
+      const backOption = this.add.image(183,472,"back").setScale(0.165).setInteractive();
+      backOption.on("pointerover", () => {
+  
+        backOption.setTint(0x285866);
+      });
+      backOption.on("pointerout", () => {
+  
+        backOption.clearTint();
+      });
+             backOption.on("pointerup", () => {
+                this.scene.start("PrincipalMenu");
+            })
       this.ScoreText = this.add.text(365, 82, "8", {
         fontSize: "50px",
       });

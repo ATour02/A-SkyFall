@@ -9,7 +9,6 @@ export default class PrincipalMenu extends Phaser.Scene {
       this.load.image("botonPlay","./public/images/botonPlay.png");
       this.load.image("botonAyuda","./public/images/botonAyuda.png");
       this.load.image("botonCredits","./public/images/botonCredits.png");
-     // this.load.image("ninja","./assets/images/Ninja.png");
       this.load.image("Titulo","./public/images/titulo.png");
       
   }
@@ -40,8 +39,13 @@ startButton.on("pointerout", () => {
   startButton.clearTint();
 });
        startButton.on("pointerup", () => {
-          this.scene.start("Game");
+          this.scene.start("Select");
       })
+this.PlayText = this.add.text(358, 260, "PLAY", {
+        fontSize: "30px",
+        fontStyle: "bold",
+        fill: "#517986",
+      });
 
 helpButton.on("pointerout", () => {
   
@@ -50,13 +54,23 @@ helpButton.on("pointerout", () => {
         helpButton.on("pointerup", () => {
             this.scene.start("Select");
         })
+  this.helpText = this.add.text(350, 352, "AYUDA", {
+          fontSize: "30px",
+          fontStyle: "bold",
+          fill: "#517986",
+        });
 
 creditsButton.on("pointerout", () => {
   
   creditsButton.clearTint();
         });
         creditsButton.on("pointerup", () => {
-              this.scene.start("Game");
+              this.scene.start("Credits");
               })
+  this.CredText = this.add.text(336, 443, "CRÉDITOS", {
+                fontSize: "25px",
+                fontStyle: "bold",
+                fill: "#517986",
+              });
    }  
 }  
