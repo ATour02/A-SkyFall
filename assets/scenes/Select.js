@@ -10,11 +10,13 @@ export default class Select extends Phaser.Scene {
     preload() {
       this.load.image("select","./public/images/select.jpg");
       this.load.image("back","./public/images/optBackSel.png");
+      this.load.image("playButt","./public/images/playButt.png");
     }
   
     create() {
       this.add.image(400,300,"fondoMenu").setScale(0.45);
       this.add.image(400,300,"select").setScale(0.5);
+      const playButton = this.add.image(230,360,"playButt").setScale(0.5).setScale(0.1).setInteractive();
       const backOption = this.add.image(183,472,"back").setScale(0.165).setInteractive();
       backOption.on("pointerover", () => {
   
@@ -27,6 +29,9 @@ export default class Select extends Phaser.Scene {
              backOption.on("pointerup", () => {
                 this.scene.start("PrincipalMenu");
             })
+        playButton.on("pointerup", () => {
+              this.scene.start("Game");
+          })
       this.ScoreText = this.add.text(365, 82, "8", {
         fontSize: "50px",
       });
