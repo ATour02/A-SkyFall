@@ -41,7 +41,7 @@ startButton.on("pointerout", () => {
        startButton.on("pointerup", () => {
           this.scene.start("Select");
       })
-this.PlayText = this.add.text(358, 260, "PLAY", {
+this.PlayText = this.add.text(346, 260, "JUGAR", {
         fontSize: "30px",
         fontStyle: "bold",
         fill: "#517986",
