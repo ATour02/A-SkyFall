@@ -10,6 +10,8 @@ export default class Game extends Phaser.Scene {
 
   init() {
     this.isWinner = false;
+    this.gameOver = false;
+    this.vida = 0;
   }
 
   create() {
@@ -33,9 +35,9 @@ export default class Game extends Phaser.Scene {
     this.ground.setVisible(false)
 
     // Sprites
-    const player = this.physics.add.image(400, 150, "PJPrin").setScale(0.20);
+    const player = this.physics.add.sprite(400, 150, "PJPrin").setScale(0.20);
 
-    const obstacles = this.physics.add.group();
+    this.shapesGroup = this.physics.add.group();
 
     this.cameras.main.setBounds(0, 0, config.width, config.height);
     this.cameras.main.setFollowOffset(0, -config.height / 2);
@@ -46,23 +48,39 @@ export default class Game extends Phaser.Scene {
 
     // obstacles
 
-    const dron = this.physics.add.image(120, 550, "dron").setScale(0.17);
-    this.dron = dron;
+    //const dron = this.physics.add.image(120, 550, "dron").setScale(0.17);
+    //this.dron = dron;
 
     // colliders
-    this.physics.add.collider(this.player, this.dron);
+    this.physics.add.collider(this.player, this.shapesGroup);
     this.physics.add.overlap(
       this.player,
-      this.dron,
+      this.shapesGroup,
+      this.collectShape,
       null,
       this
     );
+    // creacion de dron
+      this.time.addEvent({
+      delay: 1000,
+      callback: this.addShape,
+      callbackScope: this,
+      loop: false,
+      repeat: 30,
+    });
   }
 
   update() {
-    if (this.isWinner) {
-      this.scene.start("Next");
+    if (this.gameOver ) {
+      this.scene.start("Select"); // Momentáneo, habrá pantalla.
     }
+    if (this.isWinner) {
+      this.scene.start("Select"); // Momentáneo, habrá pantalla.
+    }
+    if (this.vida >= 3){
+      this.scene.start("Select");
+    }
+
     //mov
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-300);
@@ -71,22 +89,25 @@ export default class Game extends Phaser.Scene {
     } else {
       this.player.setVelocityX(0);
     }
+    if (this.collectShape) {
+      this.player.setVelocityY(0);
+    }
+    
 
     //mov obstacles
-   this.dron.setVelocityY(-160);
+   //this.dron.setVelocityY(-160);
     // Calcula el desplazamiento del fondo de suelo basado en el tiempo transcurrido
     const elapsedTime = this.time.now - this.startTime;
     const totalFallTime = this.totalFallTime;
     const groundOffsetY = (config.height * elapsedTime) / totalFallTime;
-    const skyOffsetY = groundOffsetY / 9;
+    const skyOffsetY = groundOffsetY / 8;
     // Actualiza las posiciones de los fondos de cielo y suelo
     this.sky.y = -skyOffsetY;
     console.log(this.sky.y)
-
     // Verificar si el fondo de cielo está fuera de la pantalla y reiniciarlo
     if (this.sky.y <= -570) {
       this.ground.setVisible(true);
-      this.sky.y = -600;
+
       // Animar el movimiento vertical del jugador
       this.tweens.add({
         targets: this.player,
@@ -98,7 +119,32 @@ export default class Game extends Phaser.Scene {
       })
       // Detener el movimiento vertical
     }
+    if (this.sky.y <= -650) {
+      this.isWinner = true;
+      console.log( this.isWinner);
+    }
 
     //testing dron
+}
+collectShape(player, shapeGroup) {
+  console.log("figura recolectada");
+  shapeGroup.disableBody(true, true);
+  this.vida = this.vida + 1;
+  console.log("LEER ACA" + this.vida)
+}
+//dron() { 
+  //Game.physics.add.image(120, 550, "dron").setScale(0.17);
+addShape() {
+  //const randomShape = Phaser.Math.RND.pick([ DIAMOND, SQUARE, TRIANGLE, CIRCLE,]) 
+  const randomX = Phaser.Math.RND.between(0, 800);
+
+  this.shapesGroup.create(randomX, 800, "dron")
+    .setCircle(170, 130, 100)
+    .setBounce(0.8)
+    .setScale(0.23)
+    .setVelocityY(-230)
+    //.setData(POINTS_PERCENTAGE, POINTS_PERCENTAGE_VALUE_START);
+
+  console.log("shape is added", randomX, Game.dron);
 }
 }
