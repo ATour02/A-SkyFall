@@ -119,10 +119,10 @@ export default class Game extends Phaser.Scene {
       })
       // Detener el movimiento vertical
     }
-    /*if (this.sky.y <= -650) {
+    if (this.sky.y <= -650) {
       this.isWinner = true;
       console.log( this.isWinner);
-    }*/
+    }
 
     //testing dron
 }
