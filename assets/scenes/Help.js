@@ -6,12 +6,7 @@ export default class Help extends Phaser.Scene {
     init() {
      
     }
-  
-    preload() {
-      this.load.image("ayuda","./public/images/ayuda.jpg");
-      this.load.image("back","./public/images/optBackSel.png");
-    }
-  
+   
     create() {
       
       this.add.image(400,300,"ayuda").setScale(0.5);

@@ -7,11 +7,7 @@ export default class TranPr extends Phaser.Scene {
      
     }
   
-    preload() {
-      this.load.image("PrLvl","./public/images/PrLvl.jpg");
-      this.load.image("reint","./public/images/reint.png");
-      this.load.image("back","./public/images/optBackSel.png");
-    }
+    
   
     create() {
       this.add.image(400,300,"PrLvl").setScale(0.45);

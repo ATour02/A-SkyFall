@@ -2,6 +2,13 @@ const config = {
   width: 800,
   height: 600
 };
+import {
+  OBST_DELAY,
+  OBST,
+  DRON,
+  GLOBO,
+  AVE,
+} from "../scenes/Util.js";
 
 export default class Game extends Phaser.Scene {
   constructor() {
@@ -9,9 +16,17 @@ export default class Game extends Phaser.Scene {
   }
 
   init() {
+    this.shapesRecolected = {
+      ["dron"]: { score: 100 },
+      ["globo"]: { score: 200 },
+      ["ave"]: { score: 150 },
+    };
+
     this.isWinner = false;
     this.gameOver = false;
     this.vida = 0;
+    this.score = 0;
+    this.Hscore = 0;
   }
 
   create() {
@@ -45,6 +60,7 @@ export default class Game extends Phaser.Scene {
     this.cameras.main.followOffset.y = -config.height / 2;
 
     this.player = player;
+    this.player.setCollideWorldBounds(true);
 
     // obstacles
 
@@ -92,7 +108,10 @@ export default class Game extends Phaser.Scene {
     if (this.collectShape) {
       this.player.setVelocityY(0);
     }
-    
+  // shot
+  if (this.cursors.space.isDown) {
+    console.log("fire");
+  }    
 
     //mov obstacles
    //this.dron.setVelocityY(-160);
@@ -131,14 +150,18 @@ collectShape(player, shapeGroup) {
   shapeGroup.disableBody(true, true);
   this.vida = this.vida + 1;
   console.log("LEER ACA" + this.vida)
+  const shapeName = shapeGroup.texture.key;
+  const scoreNow = this.shapesRecolected[shapeName].score;
+  this.score = this.score + scoreNow;
+  console.log("test " + this.score)
 }
 //dron() { 
   //Game.physics.add.image(120, 550, "dron").setScale(0.17);
 addShape() {
-  //const randomShape = Phaser.Math.RND.pick([ DIAMOND, SQUARE, TRIANGLE, CIRCLE,]) 
+  const randomShape = Phaser.Math.RND.pick([DRON, GLOBO, AVE]) 
   const randomX = Phaser.Math.RND.between(0, 800);
 
-  this.shapesGroup.create(randomX, 800, "dron")
+  this.shapesGroup.create(randomX, 800, randomShape)
     .setCircle(170, 130, 100)
     .setBounce(0.8)
     .setScale(0.23)

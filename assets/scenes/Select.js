@@ -7,11 +7,6 @@ export default class Select extends Phaser.Scene {
      this.score = 0;
     }
   
-    preload() {
-      this.load.image("select","./public/images/select.jpg");
-      this.load.image("back","./public/images/optBackSel.png");
-      this.load.image("playButt","./public/images/playButt.png");
-    }
   
     create() {
       this.add.image(400,300,"fondoMenu").setScale(0.45);

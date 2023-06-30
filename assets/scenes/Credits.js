@@ -7,10 +7,6 @@ export default class Credits extends Phaser.Scene {
      
     }
   
-    preload() {
-      this.load.image("CredBack","./public/images/Cred.jpg");
-      this.load.image("back","./public/images/optBackSel.png");
-    }
   
     create() {
       this.add.image(400,300,"CredBack").setScale(0.45);
