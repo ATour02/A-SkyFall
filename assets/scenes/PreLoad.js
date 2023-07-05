@@ -23,6 +23,8 @@ export default class PreLoad extends Phaser.Scene {
     this.load.image("mount", "./public/images/mountSun.jpg");
     this.load.image("ground", "./public/images/ground.png");
     this.load.image("dron", "./public/images/dron.png");
+    this.load.image("ammo", "./public/images/ammo.png");
+    this.load.image("life", "./public/images/powerUp_life.png");
     this.load.image("playButt","./public/images/playButt.png");
     this.load.image("PrLvl","./public/images/PrLvl.jpg");
     this.load.image("SgLvl","./public/images/SgLvl.jpg");
