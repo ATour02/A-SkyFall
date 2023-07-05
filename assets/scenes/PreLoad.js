@@ -19,6 +19,8 @@ export default class PreLoad extends Phaser.Scene {
     this.load.image("ayuda","./public/images/ayuda.jpg");
     this.load.image("back","./public/images/optBackSel.png");
     this.load.image("sky", "./public/images/sky.jpg");
+    this.load.image("sunrise", "./public/images/sunrise.jpg");
+    this.load.image("mount", "./public/images/mountSun.jpg");
     this.load.image("ground", "./public/images/ground.png");
     this.load.image("dron", "./public/images/dron.png");
     this.load.image("playButt","./public/images/playButt.png");
@@ -26,6 +28,11 @@ export default class PreLoad extends Phaser.Scene {
     this.load.image("reint","./public/images/reint.png");
     this.load.image("ave", "./public/images/ave.png");
     this.load.image("globo", "./public/images/globoS.png");
+    this.load.image("onSt", "./public/images/onSt.png");
+    this.load.image("twSt", "./public/images/twSt.png");
+    this.load.image("thSt", "./public/images/thSt.png");
+
+    
 
     //change for spritesheet pjPrin
     this.load.image("PJPrin", "./public/images/PJPrin.png");

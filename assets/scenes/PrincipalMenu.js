@@ -44,7 +44,7 @@ helpButton.on("pointerout", () => {
   helpButton.clearTint();
 });
         helpButton.on("pointerup", () => {
-            this.scene.start("Help");
+            this.scene.start("TranPr"); // Help
         })
   this.helpText = this.add.text(350, 352, "AYUDA", {
           fontSize: "30px",

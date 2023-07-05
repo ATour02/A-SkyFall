@@ -3,8 +3,10 @@ export default class TranPr extends Phaser.Scene {
       super("TranPr");
     }
   
-    init() {
-     
+    init(data) {
+     this.finalScorePr = data.score || 600;
+     this.Hscore = 0;
+     console.log(this.finalScorePr);
     }
   
     
@@ -29,16 +31,55 @@ export default class TranPr extends Phaser.Scene {
         
               RetryOption.setTint(0x285866);
             });
-            RetryOption.on("pointerout", () => {
+              RetryOption.on("pointerout", () => {
         
               RetryOption.clearTint();
             });
-                   RetryOption.on("pointerup", () => {
-                      this.scene.start("Game");
-                  })
+              RetryOption.on("pointerup", () => {
+              this.scene.start("Game");
+              })
+      this.scoreText = this.add.text(415, 284, "0", {
+        fontSize: "35px",
+        fontStyle: "bold",
+      });
+
+      this.HscoreText = this.add.text(413, 342, "0", {
+        fontSize: "35px",
+        fontStyle: "bold",
+      });
+
+       this.oneSt = this.add.image(400,220,"onSt")
+      .setScale(0.16)
+      .setVisible(false);
+
+      this.twoSt = this.add.image(400,220,"twSt")
+      .setScale(0.18)
+      .setVisible(false);
+
+      this.thSt = this.add.image(400,222,"thSt")
+      .setScale(0.16)
+      .setVisible(false);
+
     }
   
     update() {
-   
+      this.scoreText.setText(
+        this.finalScorePr
+      );
+    if (this.finalScorePr > this.Hscore) {
+      this.Hscore = this.finalScorePr
+    };
+    this.HscoreText.setText(
+      this.Hscore
+    );
+    if (this.finalScorePr >= 900) {
+      this.thSt.setVisible(true);
+    }
+    if (this.finalScorePr < 900 && this.finalScorePr > 400) {
+      this.twoSt.setVisible(true);
+    }
+    if (this.finalScorePr <= 400 ) {
+      this.oneSt.setVisible(true);
+    }
     }
   }

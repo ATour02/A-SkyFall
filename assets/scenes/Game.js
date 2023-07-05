@@ -24,7 +24,7 @@ export default class Game extends Phaser.Scene {
 
     this.isWinner = false;
     this.gameOver = false;
-    this.vida = 0;
+    this.vida = 3;
     this.score = 0;
     this.Hscore = 0;
   }
@@ -51,7 +51,7 @@ export default class Game extends Phaser.Scene {
     this.add.image(120, 580, "ground").setScale(1);
     this.ground.setVisible(false);
 
-    this.timeText = this.add.text(600, 15, "Score: 0", {
+    this.scoreText = this.add.text(590, 15, "Score: 0", {
       fontSize: "30px",
       fontStyle: "bold",
     });
@@ -60,7 +60,6 @@ export default class Game extends Phaser.Scene {
     const player = this.physics.add.sprite(400, 150, "PJPrin").setScale(0.20);
 
     this.shapesGroup = this.physics.add.group();
-    this.proj = this.add.group();
 
     this.cameras.main.setBounds(0, 0, config.width, config.height);
     this.cameras.main.setFollowOffset(0, -config.height / 2);
@@ -69,19 +68,9 @@ export default class Game extends Phaser.Scene {
 
     this.player = player;
     this.player.setCollideWorldBounds(true);
-    let beam = this.physics.add.sprite(this.player.x, this.player.y, "beam")
-    .setScale(3)
-    .setVelocityY(500)
-    .setVisible(false);
-    // obstacles
-
-    //const dron = this.physics.add.image(120, 550, "dron").setScale(0.17);
-    //this.dron = dron;
 
     // colliders
     this.physics.add.collider(this.player, this.shapesGroup);
-    this.physics.add.collider(beam, this.shapesGroup);
-    this.physics.add.collider(this.player, beam);
     this.physics.add.overlap(
       this.player,
       this.shapesGroup,
@@ -103,20 +92,24 @@ export default class Game extends Phaser.Scene {
 
   update() {
     if (this.gameOver ) {
-      this.scene.start("TranPr"); // Momentáneo, habrá pantalla.
+      this.scene.start("TranPr",{ score: this.score }); // Momentáneo, habrá pantalla.
     }
     if (this.isWinner) {
       this.scene.start("TranPr"); // Momentáneo, habrá pantalla.
     }
-    if (this.vida >= 3){
+    if (this.vida < 1){
       this.scene.start("TranPr");
     }
 
+    this.scoreText.setText(
+      "Score: "+
+      this.score
+    );
     //mov
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-300);
+      this.player.setVelocityX(-330);
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(300);
+      this.player.setVelocityX(330);
     } else {
       this.player.setVelocityX(0);
     }
@@ -163,12 +156,8 @@ export default class Game extends Phaser.Scene {
 collectShape(player, shapeGroup) {
   console.log("figura recolectada");
   shapeGroup.disableBody(true, true);
-  this.vida = this.vida + 1;
+  this.vida = this.vida - 1;
   console.log("LEER ACA" + this.vida)
-  const shapeName = shapeGroup.texture.key;
-  const scoreNow = this.shapesRecolected[shapeName].score;
-  this.score = this.score + scoreNow;
-  console.log("test " + this.score)
 }
 //dron() { 
   //Game.physics.add.image(120, 550, "dron").setScale(0.17);
@@ -185,9 +174,18 @@ addShape() {
 
   console.log("shape is added", randomX, Game.dron);
 }
+destroyShape(beam, shapeGroup) {
+  shapeGroup.disableBody(true, true);
+  this.beam.disableBody(true, true);
+  const shapeName = shapeGroup.texture.key;
+  const scoreNow = this.shapesRecolected[shapeName].score;
+  this.score = this.score + scoreNow;
+  console.log("test " + this.score)
+}
 shootBeam(){
-  const beam = this.physics.add.sprite(this.player.x, this.player.y, "beam")
+  this.beam = this.physics.add.sprite(this.player.x, this.player.y, "beam")
   .setScale(3)
   .setVelocityY(500);
+  this.physics.add.collider(this.beam, this.shapesGroup,this.destroyShape, null, this)
 }
 }
