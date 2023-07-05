@@ -63,7 +63,7 @@ creditsButton.on("pointerout", () => {
   creditsButton.clearTint();
         });
         creditsButton.on("pointerup", () => {
-              this.scene.start("Credits");
+              this.scene.start("Game2");
               })
   this.CredText = this.add.text(336, 443, "CRÉDITOS", {
                 fontSize: "25px",

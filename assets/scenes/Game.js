@@ -26,7 +26,10 @@ export default class Game extends Phaser.Scene {
     };
     this.powerUpRec = {
       ["ammo"]: { ammo: 3 },
-      ["life"]: { life: 0 },
+    };
+
+    this.powerUpLife = {
+      ["life"]: { life: 3 },
     }
 
     this.isWinner = false;
@@ -201,7 +204,6 @@ collectShape(player, shapeGroup) {
   this.life = this.life - 1;
   console.log("LEER ACA" + this.life)
 }
-
 addShape() {
   const randomShape = Phaser.Math.RND.pick([DRON, GLOBO, AVE]) 
   const randomX = Phaser.Math.RND.between(0, 800);
