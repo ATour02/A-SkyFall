@@ -45,13 +45,19 @@ const config = {
       const skyHeight = config.height * 2;
       this.sky = this.add.image(0, 0, "sunrise").setOrigin(0);
       this.sky.setDisplaySize(skyWidth, skyHeight);
+      this.sky.y = 0;
   
       // Background ground
       this.ground = 
       this.add.image(120, 580, "ground").setScale(1);
       this.ground.setVisible(false);
   
-      this.scoreText = this.add.text(590, 15, "Score: 0", {
+      this.scoreText = this.add.text(575, 35, "SCORE:", {
+        fontSize: "30px",
+        fontStyle: "bold",
+        fill: "#99FF33",
+      });
+      this.punScoreText = this.add.text(700, 35, "0", {
         fontSize: "30px",
         fontStyle: "bold",
       });
@@ -85,7 +91,7 @@ const config = {
         callback: this.addShape,
         callbackScope: this,
         loop: false,
-        repeat: 30,
+        repeat: 35,
       });
       this.space = this.cursors.space;
     }
@@ -98,8 +104,7 @@ const config = {
         this.changeScene()
       }
   
-      this.scoreText.setText(
-        "Score: "+
+      this.punScoreText.setText(
         this.score
       );
       //mov
@@ -125,7 +130,7 @@ const config = {
       const elapsedTime = this.time.now - this.startTime;
       const totalFallTime = this.totalFallTime;
       const groundOffsetY = (config.height * elapsedTime) / totalFallTime;
-      const skyOffsetY = groundOffsetY / 8;
+      const skyOffsetY = groundOffsetY / 9;
       // Actualiza las posiciones de los fondos de cielo y suelo
       this.sky.y = -skyOffsetY;
       console.log(this.sky.y)

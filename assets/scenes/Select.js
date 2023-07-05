@@ -1,3 +1,7 @@
+const config = {
+  width: 800,
+  height: 600
+};
 export default class Select extends Phaser.Scene {
   constructor() {
     super("Select");
@@ -5,17 +9,19 @@ export default class Select extends Phaser.Scene {
   // simular boton en imagen
   init({ prNivel, SgNivel }) {
     this.score = 0;
-    this.stairCount = prNivel || 1;
-    this.stairCountSg = SgNivel || 1;
-    console.log("test" + this.stairCount + "SG   " + this.stairCountSg);
+    this.stairCount = prNivel || 0;
+    this.stairCountSg = SgNivel || 0;
+    this.TotalStairs = this.stairCount + this.stairCountSg;
+    console.log("test" + this.stairCount + "SG   " + this.stairCountSg + "Total es " + this.TotalStairs);
 
   }
 
 
   create() {
-    this.add.image(400, 300, "fondoMenu").setScale(0.45);
+    this.add.image(400, 300, "fondoMenu").setScale(0.45).setDisplaySize(config.width, config.height);;
     this.add.image(400, 300, "select").setScale(0.5);
     const playButton = this.add.image(230, 400, "playButt").setScale(0.5).setScale(0.1).setInteractive();
+    const playButtonSg = this.add.image(400, 400, "playButt").setScale(0.5).setScale(0.1).setInteractive();
     const backOption = this.add.image(183, 472, "back").setScale(0.165).setInteractive();
     backOption.on("pointerover", () => {
 
@@ -31,7 +37,10 @@ export default class Select extends Phaser.Scene {
     playButton.on("pointerup", () => {
       this.scene.start("Game");
     })
-    this.ScoreText = this.add.text(365, 82, "8", {
+    playButtonSg.on("pointerup", () => {
+      this.scene.start("Game2");
+    })
+    this.ScoreText = this.add.text(365, 82, "0", {
       fontSize: "50px",
     });
     //Estrellas primer nivel
@@ -70,30 +79,34 @@ export default class Select extends Phaser.Scene {
   }
 
   update() {
- if (this.stairCount <= 1) {
+ if (this.stairCount >= 0 && this.stairCount < 1) {
   this.noSt.setVisible(true);
  };
- if ( this.stairCount > 1 && this.stairCount <= 2 ) {
+ if ( this.stairCount >= 1 && this.stairCount < 2 ) {
   this.oneSt.setVisible(true);
  };
- if ( this.stairCount > 2 && this.stairCount <= 3 ) {
+ if ( this.stairCount >= 2 && this.stairCount < 3 ) {
   this.twoSt.setVisible(true);
  };
- if (this.stairCount > 3 && this.stairCount <= 4 ) {
+ if (this.stairCount >= 3 ) {
   this.thSt.setVisible(true);
  };
 // Lógica seg estrellas
- if (this.stairCountSg <= 1) {
+ if (this.stairCountSg >= 0 && this.stairCountSg < 1) {
   this.noStSg.setVisible(true);
  };
- if ( this.stairCountSg > 1 && this.stairCountSg <= 2 ) {
+ if ( this.stairCountSg >= 1 && this.stairCountSg < 2 ) {
   this.oneStSg.setVisible(true);
  };
- if ( this.stairCountSg > 2 && this.stairCountSg <= 3 ) {
+ if ( this.stairCountSg >= 2 && this.stairCountSg < 3 ) {
   this.twoStSg.setVisible(true);
  };
- if (this.stairCountSg > 3 && this.stairCountSg <= 4 ) {
+ if (this.stairCountSg >= 3 ) {
   this.thStSg.setVisible(true);
  };
+
+ this.ScoreText.setText(
+  this.TotalStairs
+);
   }
 }

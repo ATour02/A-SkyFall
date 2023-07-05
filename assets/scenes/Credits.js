@@ -1,3 +1,7 @@
+const config = {
+  width: 800,
+  height: 600
+};
 export default class Credits extends Phaser.Scene {
     constructor() {
       super("Credits");
@@ -9,8 +13,8 @@ export default class Credits extends Phaser.Scene {
   
   
     create() {
-      this.add.image(400,300,"CredBack").setScale(0.45);
-      const backOption = this.add.image(400,460,"back").setScale(0.2).setInteractive();
+      this.add.image(400,300,"CredBack").setScale(0.45).setDisplaySize(config.width, config.height);
+      const backOption = this.add.image(400,480,"back").setScale(0.2).setInteractive();
       backOption.on("pointerover", () => {
   
         backOption.setTint(0x285866);

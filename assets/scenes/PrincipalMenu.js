@@ -1,3 +1,7 @@
+const config = {
+  width: 800,
+  height: 600
+};
 export default class PrincipalMenu extends Phaser.Scene {
     constructor() {
       super("PrincipalMenu");
@@ -6,7 +10,8 @@ export default class PrincipalMenu extends Phaser.Scene {
     }
 
   create(){
-      this.add.image(400,300,"fondoMenu").setScale(0.45);
+      this.add.image(400,300,"fondoMenu").setScale(0.45).setDisplaySize(config.width, config.height);
+
       this.add.image(400,180,"Titulo").setScale(0.4);
       
 
@@ -45,7 +50,7 @@ helpButton.on("pointerout", () => {
   helpButton.clearTint();
 });
         helpButton.on("pointerup", () => {
-            this.scene.start("Game2"); // Help
+            this.scene.start("Help"); 
         })
   this.helpText = this.add.text(350, 352, "AYUDA", {
           fontSize: "30px",
@@ -65,6 +70,7 @@ creditsButton.on("pointerout", () => {
                 fontStyle: "bold",
                 fill: "#517986",
               });
-   }
+this.cameras.main.setBounds(0, 0, config.width, config.height);
+}
   
 }  

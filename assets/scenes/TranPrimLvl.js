@@ -1,3 +1,7 @@
+const config = {
+  width: 800,
+  height: 600
+};
 export default class TranPr extends Phaser.Scene {
     constructor() {
       super("TranPr");
@@ -13,9 +17,9 @@ export default class TranPr extends Phaser.Scene {
     
   
     create() {
-      this.add.image(400,300,"PrLvl").setScale(0.45);
+      this.add.image(400,300,"PrLvl").setScale(0.45).setDisplaySize(config.width, config.height);
       
-      const backOption = this.add.image(205,457,"back").setScale(0.165).setInteractive();
+      const backOption = this.add.image(220,490,"back").setScale(0.2).setInteractive();
       backOption.on("pointerover", () => {
   
         backOption.setTint(0x285866);
@@ -27,7 +31,7 @@ export default class TranPr extends Phaser.Scene {
              backOption.on("pointerup", () => {
                 this.stairsPr()
             })
-      const RetryOption = this.add.image(600,455,"reint").setScale(0.26).setInteractive();
+      const RetryOption = this.add.image(600,490,"reint").setScale(0.30).setInteractive();
             RetryOption.on("pointerover", () => {
         
               RetryOption.setTint(0x285866);
@@ -39,12 +43,12 @@ export default class TranPr extends Phaser.Scene {
               RetryOption.on("pointerup", () => {
               this.scene.start("Game");
               })
-      this.scoreText = this.add.text(415, 284, "0", {
+      this.scoreText = this.add.text(415, 303, "0", {
         fontSize: "35px",
         fontStyle: "bold",
       });
 
-      this.HscoreText = this.add.text(413, 342, "0", {
+      this.HscoreText = this.add.text(413, 370, "0", {
         fontSize: "35px",
         fontStyle: "bold",
       });
@@ -79,24 +83,25 @@ export default class TranPr extends Phaser.Scene {
     );
     if (this.finalScorePr >= 1200) {
       this.thSt.setVisible(true);
-      this.stairs = 4;
+      this.stairs = 3;
     }
     if (this.finalScorePr < 1200 && this.finalScorePr >= 700) {
       this.twoSt.setVisible(true);
-      this.stairs = 3;
+      this.stairs = 2;
     }
     if (this.finalScorePr < 700 && this.finalScorePr >= 300 ) {
       this.oneSt.setVisible(true);
-      this.stairs = 2;
+      this.stairs = 1;
     }
     if (this.finalScorePr < 300 ) {
       this.noSt.setVisible(true);
-      this.stairs = 1;
+      this.stairs = 0;
     }
     }
     stairsPr() {
     this.scene.start("Select", {
       prNivel: this.stairs,
     });
+    console.log(this.stairs);
     }
   }
