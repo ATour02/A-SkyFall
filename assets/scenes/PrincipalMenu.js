@@ -2,7 +2,8 @@ export default class PrincipalMenu extends Phaser.Scene {
     constructor() {
       super("PrincipalMenu");
     }
-    init(){}
+    init(){
+    }
 
   create(){
       this.add.image(400,300,"fondoMenu").setScale(0.45);
@@ -31,7 +32,7 @@ startButton.on("pointerout", () => {
   startButton.clearTint();
 });
        startButton.on("pointerup", () => {
-          this.scene.start("Select");
+        this.scene.start("Select");
       })
 this.PlayText = this.add.text(346, 260, "JUGAR", {
         fontSize: "30px",
@@ -44,7 +45,7 @@ helpButton.on("pointerout", () => {
   helpButton.clearTint();
 });
         helpButton.on("pointerup", () => {
-            this.scene.start("TranPr"); // Help
+            this.scene.start("Game2"); // Help
         })
   this.helpText = this.add.text(350, 352, "AYUDA", {
           fontSize: "30px",
@@ -64,5 +65,6 @@ creditsButton.on("pointerout", () => {
                 fontStyle: "bold",
                 fill: "#517986",
               });
-   }  
+   }
+  
 }  

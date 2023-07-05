@@ -91,14 +91,11 @@ export default class Game extends Phaser.Scene {
   }
 
   update() {
-    if (this.gameOver ) {
-      this.scene.start("TranPr",{ score: this.score }); // Momentáneo, habrá pantalla.
-    }
     if (this.isWinner) {
-      this.scene.start("TranPr"); // Momentáneo, habrá pantalla.
+      this.changeScene() // Momentáneo, habrá pantalla.
     }
     if (this.vida < 1){
-      this.scene.start("TranPr");
+      this.changeScene()
     }
 
     this.scoreText.setText(
@@ -187,5 +184,10 @@ shootBeam(){
   .setScale(3)
   .setVelocityY(500);
   this.physics.add.collider(this.beam, this.shapesGroup,this.destroyShape, null, this)
+}
+changeScene() {
+  this.scene.start("TranPr", { 
+    score: this.score,
+   });
 }
 }
