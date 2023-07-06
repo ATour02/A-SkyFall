@@ -87,6 +87,7 @@ const config = {
   
       // Sprites
       const player = this.physics.add.sprite(400, 150, "PJPrin").setScale(0.20);
+      player.play("pjPrin");
   
       this.shapesGroup = this.physics.add.group();
       this.powerUp = this.physics.add.group();

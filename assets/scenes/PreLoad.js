@@ -39,11 +39,15 @@ export default class PreLoad extends Phaser.Scene {
     
 
     //change for spritesheet pjPrin
-    this.load.image("PJPrin", "./public/images/PJPrin.png");
+    this.load.spritesheet("PJPrin", "./public/images/PJPrin.png",{
+      frameWidth: 64,
+      frameHeight: 80
+    });
     this.load.spritesheet("beam", "./public/images/beam.png",{
       frameWidth: 16,
       frameHeight: 16
     });
+
     //obstacles
     
     }
@@ -54,6 +58,12 @@ export default class PreLoad extends Phaser.Scene {
         frameRate: 20,
         repeat: -1,
       }); 
+      this.anims.create({
+        key: "pjPrin",
+        frames: this.anims.generateFrameNumbers("PJPrin"),
+        frameRate: 3,
+        repeat: -1,
+      });  
         // init scene Menú
         this.scene.start("PrincipalMenu");
     }

@@ -24,13 +24,10 @@ export default class Game extends Phaser.Scene {
       ["globo"]: { score: 200 },
       ["ave"]: { score: 150 },
     };
-    this.powerUpRec = {
-      ["ammo"]: { ammo: 3 },
+    this.powerUp = {
+      ["ammo"]: { ammo: 3 , life: 0},
+      ["life"]: { life: 3 , ammo: 0},
     };
-
-    this.powerUpLife = {
-      ["life"]: { life: 3 },
-    }
 
     this.isWinner = false;
     this.gameOver = false;
@@ -83,10 +80,12 @@ export default class Game extends Phaser.Scene {
       fill: "#99FF33",
     });
     // Sprites
-    const player = this.physics.add.sprite(400, 150, "PJPrin").setScale(0.20);
+    const player = this.physics.add.sprite(400, 150, "PJPrin").setScale(1.3);
+    player.play("pjPrin")
 
     this.shapesGroup = this.physics.add.group();
     this.powerUp = this.physics.add.group();
+    
 
     this.cameras.main.setBounds(0, 0, config.width, config.height);
     this.cameras.main.setFollowOffset(0, -config.height / 2);
@@ -212,7 +211,8 @@ addShape() {
     .setCircle(170, 130, 100)
     .setBounce(0.8)
     .setScale(0.23)
-    .setVelocityY(-230)
+    .setVelocityY(-230);
+    
 
   console.log("shape is added", randomX, Game.dron);
 }
@@ -247,7 +247,7 @@ addPower() {
     .setBounce(0.8)
     .setScale(0.5)
     .setVelocityY(-230);
-  this.physics.add.collider(this.player, this.powerUp,this.destroyPower, null, this)
+  this.physics.add.collider(this.player, this.powerUp,this.destroyPower, null, this) 
 }
 
 }
