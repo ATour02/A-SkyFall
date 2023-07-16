@@ -2,22 +2,22 @@ const config = {
     width: 800,
     height: 600
   };
-export default class TranSg extends Phaser.Scene {
+export default class TranTh extends Phaser.Scene {
     constructor() {
-      super("TranSg");
+      super("TranTh");
     }
   
     init({ score }) {
-     this.finalScoreSg = score || 0;
+     this.finalScoreTh = score || 0;
      this.Hscore = 0;
      this.stairs = 0;
-     console.log(this.finalScoreSg);
+     console.log(this.finalScoreTh);
     }
   
     
   
     create() {
-        this.add.image(400,300,"SgLvl").setScale(0.45).setDisplaySize(config.width, config.height);
+        this.add.image(400,300,"ThLvl").setScale(0.45).setDisplaySize(config.width, config.height);
       
       const backOption = this.add.image(205,490,"back").setScale(0.19).setInteractive();
       backOption.on("pointerover", () => {
@@ -29,7 +29,7 @@ export default class TranSg extends Phaser.Scene {
         backOption.clearTint();
       });
              backOption.on("pointerup", () => {
-                this.stairsSg()
+                this.stairsTh()
             })
       const RetryOption = this.add.image(600,490,"reint").setScale(0.28).setInteractive();
             RetryOption.on("pointerover", () => {
@@ -41,7 +41,7 @@ export default class TranSg extends Phaser.Scene {
               RetryOption.clearTint();
             });
               RetryOption.on("pointerup", () => {
-              this.scene.start("Game2");
+              this.scene.start("Game3");
               })
       this.scoreText = this.add.text(415, 293, "0", {
         fontSize: "35px",
@@ -73,34 +73,34 @@ export default class TranSg extends Phaser.Scene {
   
     update() {
       this.scoreText.setText(
-        this.finalScoreSg
+        this.finalScoreTh
       );
-    if (this.finalScoreSg > this.Hscore) {
-      this.Hscore = this.finalScoreSg
+    if (this.finalScoreTh > this.Hscore) {
+      this.Hscore = this.finalScoreTh
     };
     this.HscoreText.setText(
       this.Hscore
     );
-    if (this.finalScoreSg >= 1200) {
+    if (this.finalScoreTh >= 1200) {
       this.thSt.setVisible(true);
       this.stairs = 3;
     }
-    if (this.finalScoreSg < 1200 && this.finalScoreSg >= 700) {
+    if (this.finalScoreTh < 1200 && this.finalScoreTh >= 700) {
       this.twoSt.setVisible(true);
       this.stairs = 2;
     }
-    if (this.finalScoreSg < 700 && this.finalScoreSg >= 300 ) {
+    if (this.finalScoreTh < 700 && this.finalScoreTh >= 300 ) {
       this.oneSt.setVisible(true);
       this.stairs = 1;
     }
-    if (this.finalScoreSg < 300 ) {
+    if (this.finalScoreTh < 300 ) {
       this.noSt.setVisible(true);
       this.stairs = 0;
     }
     }
-    stairsSg() {
+    stairsTh() {
     this.scene.start("Select", {
-      SgNivel: this.stairs,
+      ThNivel: this.stairs,
     });
     }
   }

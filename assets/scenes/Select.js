@@ -7,12 +7,13 @@ export default class Select extends Phaser.Scene {
     super("Select");
   }
   // simular boton en imagen
-  init({ prNivel, SgNivel }) {
+  init({ prNivel, SgNivel, ThNivel }) {
     this.score = 0;
     this.stairCount = prNivel || 0;
     this.stairCountSg = SgNivel || 0;
-    this.TotalStairs = this.stairCount + this.stairCountSg;
-    console.log("test" + this.stairCount + "SG   " + this.stairCountSg + "Total es " + this.TotalStairs);
+    this.stairCountTh = ThNivel || 0;
+    this.TotalStairs = this.stairCount + this.stairCountSg + this.stairCountTh;
+    console.log("test" + this.stairCount + "SG   " + this.stairCountSg + "Third " + this.stairCountTh);
 
   }
 
@@ -22,6 +23,7 @@ export default class Select extends Phaser.Scene {
     this.add.image(400, 300, "select").setScale(0.5);
     const playButton = this.add.image(230, 400, "playButt").setScale(0.5).setScale(0.1).setInteractive();
     const playButtonSg = this.add.image(400, 400, "playButt").setScale(0.5).setScale(0.1).setInteractive();
+    const playButtonTh = this.add.image(576, 400, "playButt").setScale(0.5).setScale(0.1).setInteractive();
     const backOption = this.add.image(183, 472, "back").setScale(0.165).setInteractive();
     backOption.on("pointerover", () => {
 
@@ -39,6 +41,9 @@ export default class Select extends Phaser.Scene {
     })
     playButtonSg.on("pointerup", () => {
       this.scene.start("Game2");
+    })
+    playButtonTh.on("pointerup", () => {
+      this.scene.start("Game3");
     })
     this.ScoreText = this.add.text(365, 82, "0", {
       fontSize: "50px",
@@ -76,6 +81,25 @@ export default class Select extends Phaser.Scene {
     this.thStSg = this.add.image(400, 360, "thSt")
       .setScale(0.065)
       .setVisible(false);
+
+
+      //Estrellas Tercer Nivel
+      this.noStTh = this.add.image(576, 362, "noSt")
+      .setScale(0.065)
+      .setVisible(false);
+
+    this.oneStTh = this.add.image(576, 360, "onSt")
+      .setScale(0.065)
+      .setVisible(false);
+
+    this.twoStTh = this.add.image(576, 360, "twSt")
+      .setScale(0.067)
+      .setVisible(false);
+
+    this.thStTh = this.add.image(576, 360, "thSt")
+      .setScale(0.065)
+      .setVisible(false);
+
   }
 
   update() {
@@ -103,6 +127,21 @@ export default class Select extends Phaser.Scene {
  };
  if (this.stairCountSg >= 3 ) {
   this.thStSg.setVisible(true);
+ };
+
+ // Logica Tercer estrellas
+
+ if (this.stairCountTh >= 0 && this.stairCountTh < 1) {
+  this.noStTh.setVisible(true);
+ };
+ if ( this.stairCountTh >= 1 && this.stairCountTh < 2 ) {
+  this.oneStTh.setVisible(true);
+ };
+ if ( this.stairCountTh >= 2 && this.stairCountTh < 3 ) {
+  this.twoStTh.setVisible(true);
+ };
+ if (this.stairCountTh >= 3 ) {
+  this.thStTh.setVisible(true);
  };
 
  this.ScoreText.setText(
