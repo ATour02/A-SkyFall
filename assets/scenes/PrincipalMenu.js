@@ -12,7 +12,7 @@ export default class PrincipalMenu extends Phaser.Scene {
   create(){
       this.add.image(400,300,"fondoMenu").setScale(0.45).setDisplaySize(config.width, config.height);
 
-      this.add.image(400,180,"Titulo").setScale(0.4);
+      this.add.image(400,180,"Titulo").setScale(0.5);
       
 
       const startButton=this.add.image(390,280,"botonPlay").setScale(0.3).setInteractive();

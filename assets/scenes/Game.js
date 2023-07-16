@@ -9,7 +9,6 @@ import {
   GLOBO,
   AVE,
   ammo,
-  powerUp_life,
   POWUP,
 } from "../scenes/Util.js";
 
@@ -24,10 +23,6 @@ export default class Game extends Phaser.Scene {
       ["globo"]: { score: 200 },
       ["ave"]: { score: 150 },
     };
-    this.powerUp = {
-      ["ammo"]: { ammo: 3 , life: 0},
-      ["life"]: { life: 3 , ammo: 0},
-    };
 
     this.isWinner = false;
     this.gameOver = false;
@@ -35,6 +30,7 @@ export default class Game extends Phaser.Scene {
     this.score = 0;
     this.Hscore = 0;
     this.ammo = 5;
+    
   }
 
   create() {
@@ -84,7 +80,6 @@ export default class Game extends Phaser.Scene {
     player.play("pjPrin")
 
     this.shapesGroup = this.physics.add.group();
-    this.powerUp = this.physics.add.group();
     
 
     this.cameras.main.setBounds(0, 0, config.width, config.height);
@@ -96,19 +91,11 @@ export default class Game extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
 
     // colliders
-    this.physics.add.collider(this.player, this.powerUp);
     this.physics.add.collider(this.player, this.shapesGroup);
     this.physics.add.overlap(
       this.player,
       this.shapesGroup,
       this.collectShape,
-      null,
-      this
-    );
-    this.physics.add.overlap(
-      this.player,
-      this.powerUp,
-      this.destroyPower,
       null,
       this
     );
@@ -121,15 +108,14 @@ export default class Game extends Phaser.Scene {
       loop: false,
       repeat: 30,
     });
-    this.space = this.cursors.space;
-
+    //municion
     this.time.addEvent({
-      delay: 1000,
-      callback: this.addPower,
+      delay: 2200,
+      callback: this.addMun,
       callbackScope: this,
-      loop: false,
-      repeat: 30,
+      loop: true,
     });
+    this.space = this.cursors.space;
   }
 
   update() {
@@ -158,9 +144,6 @@ export default class Game extends Phaser.Scene {
       this.player.setVelocityX(0);
     }
     if (this.collectShape ) {
-      this.player.setVelocityY(0);
-    }
-    if (this.destroyPower) {
       this.player.setVelocityY(0);
     }
   // shot
@@ -224,9 +207,6 @@ destroyShape(beam, shapeGroup) {
   this.score = this.score + scoreNow;
   console.log("test " + this.score)
 }
-destroyPower(player, powerUp) {
-  powerUp.disableBody(true, true);
-}
 shootBeam(){
   this.beam = this.physics.add.sprite(this.player.x, this.player.y, "beam")
   .setScale(3)
@@ -238,16 +218,8 @@ changeScene() {
     score: this.score,
    });
 }
-addPower() {
-  const randomPower = Phaser.Math.RND.pick([powerUp_life, ammo]) 
-  const randomX = Phaser.Math.RND.between(0, 800);
-
-  this.powerUp.create(randomX, 800, randomPower)
-  .setCircle(55, 0, 10)
-    .setBounce(0.8)
-    .setScale(0.5)
-    .setVelocityY(-230);
-  this.physics.add.collider(this.player, this.powerUp,this.destroyPower, null, this) 
+addMun() {
+  this.ammo = this.ammo + 1;
 }
 
 }

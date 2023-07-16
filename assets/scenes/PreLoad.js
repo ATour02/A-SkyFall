@@ -47,6 +47,10 @@ export default class PreLoad extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16
     });
+    this.load.spritesheet("bum", "./public/images/explosion.png",{
+      frameWidth: 16,
+      frameHeight: 16
+    });
 
     //obstacles
     
@@ -58,6 +62,13 @@ export default class PreLoad extends Phaser.Scene {
         frameRate: 20,
         repeat: -1,
       }); 
+      this.anims.create({
+        key: "bum_anim",
+        frames: this.anims.generateFrameNumbers("bum"),
+        frameRate: 20,
+        repeat: 0,
+      }); 
+
       this.anims.create({
         key: "pjPrin",
         frames: this.anims.generateFrameNumbers("PJPrin"),

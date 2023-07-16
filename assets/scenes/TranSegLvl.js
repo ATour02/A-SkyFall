@@ -43,29 +43,29 @@ export default class TranSg extends Phaser.Scene {
               RetryOption.on("pointerup", () => {
               this.scene.start("Game2");
               })
-      this.scoreText = this.add.text(415, 303, "0", {
+      this.scoreText = this.add.text(415, 293, "0", {
         fontSize: "35px",
         fontStyle: "bold",
       });
 
-      this.HscoreText = this.add.text(413, 370, "0", {
+      this.HscoreText = this.add.text(413, 360, "0", {
         fontSize: "35px",
         fontStyle: "bold",
       });
 
-      this.noSt = this.add.image(400,228,"noSt")
+      this.noSt = this.add.image(400,218,"noSt")
       .setScale(0.18)
       .setVisible(false);
 
-       this.oneSt = this.add.image(400,220,"onSt")
+       this.oneSt = this.add.image(400,210,"onSt")
       .setScale(0.16)
       .setVisible(false);
 
-      this.twoSt = this.add.image(400,220,"twSt")
+      this.twoSt = this.add.image(400,210,"twSt")
       .setScale(0.18)
       .setVisible(false);
 
-      this.thSt = this.add.image(400,222,"thSt")
+      this.thSt = this.add.image(400,212,"thSt")
       .setScale(0.16)
       .setVisible(false);
 
