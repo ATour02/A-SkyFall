@@ -57,8 +57,15 @@ const config = {
   
       // Background ground
       this.ground =
-        this.add.image(120, 580, "ground").setScale(1);
-      this.ground.setVisible(false);
+    this.add.image(400, 580, "ground3").setScale(0.3);
+    this.ground2 =
+    this.add.image(100, 580, "ground3").setScale(0.3);
+    this.ground3 =
+    this.add.image(700, 580, "ground3").setScale(0.3);
+  
+    this.ground.setVisible(false);
+    this.ground2.setVisible(false);
+    this.ground3.setVisible(false);
   
       this.scoreText = this.add.text(575, 35, "SCORE:", {
         fontSize: "30px",
@@ -170,6 +177,8 @@ const config = {
       // Verificar si el fondo de cielo está fuera de la pantalla y reiniciarlo
       if (this.sky.y <= -600) {
         this.ground.setVisible(true);
+      this.ground2.setVisible(true);
+      this.ground3.setVisible(true);
   
         // Animar el movimiento vertical del jugador
         this.tweens.add({
