@@ -8,6 +8,7 @@ import {
   DRON,
   GLOBO,
   AVE,
+  AVE_sg,
   ammo,
   POWUP,
 } from "../scenes/Util.js";
@@ -22,6 +23,7 @@ export default class Game extends Phaser.Scene {
       ["dron"]: { score: 100 },
       ["globo"]: { score: 200 },
       ["ave"]: { score: 150 },
+      ["ave2"]: { score: 150 },
     };
 
     this.isWinner = false;
@@ -187,7 +189,7 @@ collectShape(player, shapeGroup) {
   console.log("LEER ACA" + this.life)
 }
 addShape() {
-  const randomShape = Phaser.Math.RND.pick([DRON, GLOBO, AVE]) 
+  const randomShape = Phaser.Math.RND.pick([DRON, GLOBO, AVE, AVE_sg]) 
   const randomX = Phaser.Math.RND.between(0, 800);
 
   this.shapesGroup.create(randomX, 800, randomShape)

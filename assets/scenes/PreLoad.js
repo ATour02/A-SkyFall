@@ -31,6 +31,7 @@ export default class PreLoad extends Phaser.Scene {
     this.load.image("ThLvl","./public/images/ThLvl.jpg");
     this.load.image("reint","./public/images/reint.png");
     this.load.image("ave", "./public/images/ave.png");
+    this.load.image("ave2", "./public/images/ave2.png");
     this.load.image("globo", "./public/images/globoS.png");
     this.load.image("noSt", "./public/images/noSt.png");
     this.load.image("onSt", "./public/images/onSt.png");
