@@ -76,21 +76,22 @@ export default class Game extends Phaser.Scene {
       fontSize: "30px",
       fontStyle: "bold",
     });
-    this.ammoText = this.add.text(275, 35, "Ammo", {
+    this.ammoText = this.add.text(100, 85, "x", {
       fontSize: "30px",
       fontStyle: "bold",
-      fill: "#99FF33",
     });
-    this.lifeText = this.add.text(75, 35, "Ammo", {
+    this.lifeText = this.add.text(100, 35, "x", {
       fontSize: "30px",
       fontStyle: "bold",
-      fill: "#99FF33",
     });
     // Sprites
     const player = this.physics.add.sprite(400, 150, "PJPrin").setScale(1.3);
     player.play("pjPrin")
 
     this.shapesGroup = this.physics.add.group();
+
+    this.add.image(70, 100, "ammo").setScale(0.42);
+    this.add.image(70, 50, "life").setScale(0.42);
     
 
     this.cameras.main.setBounds(0, 0, config.width, config.height);
@@ -121,7 +122,7 @@ export default class Game extends Phaser.Scene {
     });
     //municion
     this.time.addEvent({
-      delay: 2200,
+      delay: 2500,
       callback: this.addMun,
       callbackScope: this,
       loop: true,
@@ -141,10 +142,10 @@ export default class Game extends Phaser.Scene {
       this.score
     );
     this.ammoText.setText(
-      "Ammo: " +  this.ammo
+      "x " +  this.ammo
     );
     this.lifeText.setText(
-      "Life: " +  this.life
+      "x " +  this.life
     );
     //mov
     if (this.cursors.left.isDown) {

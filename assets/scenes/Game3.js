@@ -77,15 +77,13 @@ const config = {
         fontStyle: "bold",
       });
   
-      this.ammoText = this.add.text(275, 35, "Ammo", {
+      this.ammoText = this.add.text(100, 85, "x", {
         fontSize: "30px",
         fontStyle: "bold",
-        fill: "#99FF33",
       });
-      this.lifeText = this.add.text(75, 35, "Ammo", {
+      this.lifeText = this.add.text(100, 35, "x", {
         fontSize: "30px",
         fontStyle: "bold",
-        fill: "#99FF33",
       });
   
       // Sprites
@@ -93,6 +91,8 @@ const config = {
       player.play("pjPrin");
   
       this.shapesGroup = this.physics.add.group();
+      this.add.image(70, 100, "ammo").setScale(0.42);
+    this.add.image(70, 50, "life").setScale(0.42);
   
       this.cameras.main.setBounds(0, 0, config.width, config.height);
       this.cameras.main.setFollowOffset(0, -config.height / 2);
@@ -141,10 +141,10 @@ const config = {
         this.score
       );
       this.ammoText.setText(
-        "Ammo: " + this.ammo
+        "x " +  this.ammo
       );
       this.lifeText.setText(
-        "Life: " + this.life
+        "x " +  this.life
       );
       //mov
       if (this.cursors.left.isDown) {
