@@ -7,7 +7,9 @@ const config = {
     OBST,
     DRON,
     GLOBO,
+    GLOBO_sg,
     AVE,
+    AVE_sg,
     ammo,
     powerUp_life,
     POWUP,
@@ -22,7 +24,9 @@ const config = {
       this.shapesRecolected = {
         ["dron"]: { score: 100 },
         ["globo"]: { score: 200 },
+        ["globo2"]: { score: 200 },
         ["ave"]: { score: 150 },
+        ["ave2"]: { score: 150 },
       };
   
       this.isWinner = false;
@@ -193,7 +197,7 @@ const config = {
     //dron() { 
     //Game.physics.add.image(120, 550, "dron").setScale(0.17);
     addShape() {
-      const randomShape = Phaser.Math.RND.pick([DRON, GLOBO, AVE])
+      const randomShape = Phaser.Math.RND.pick([DRON, GLOBO,GLOBO_sg, AVE, AVE_sg])
       const randomX = Phaser.Math.RND.between(0, 800);
   
       this.shapesGroup.create(randomX, 800, randomShape)

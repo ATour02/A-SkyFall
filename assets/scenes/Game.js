@@ -7,6 +7,7 @@ import {
   OBST,
   DRON,
   GLOBO,
+  GLOBO_sg,
   AVE,
   AVE_sg,
   ammo,
@@ -22,6 +23,7 @@ export default class Game extends Phaser.Scene {
     this.shapesRecolected = {
       ["dron"]: { score: 100 },
       ["globo"]: { score: 200 },
+      ["globo2"]: { score: 200 },
       ["ave"]: { score: 150 },
       ["ave2"]: { score: 150 },
     };
@@ -54,9 +56,16 @@ export default class Game extends Phaser.Scene {
     this.sky.y = 0;
 
     // Background ground
-    this.ground = 
-    this.add.image(120, 580, "ground").setScale(1);
+    this.ground =
+    this.add.image(400, 580, "ground").setScale(0.3);
+    this.ground2 =
+    this.add.image(100, 580, "ground").setScale(0.3);
+    this.ground3 =
+    this.add.image(700, 580, "ground").setScale(0.3);
+  
     this.ground.setVisible(false);
+    this.ground2.setVisible(false);
+    this.ground3.setVisible(false);
 
     this.scoreText = this.add.text(575, 35, "SCORE:", {
       fontSize: "30px",
@@ -165,6 +174,8 @@ export default class Game extends Phaser.Scene {
     // Verificar si el fondo de cielo está fuera de la pantalla y reiniciarlo
     if (this.sky.y <= -570) {
       this.ground.setVisible(true);
+      this.ground2.setVisible(true);
+      this.ground3.setVisible(true);
 
       // Animar el movimiento vertical del jugador
       this.tweens.add({
@@ -189,7 +200,7 @@ collectShape(player, shapeGroup) {
   console.log("LEER ACA" + this.life)
 }
 addShape() {
-  const randomShape = Phaser.Math.RND.pick([DRON, GLOBO, AVE, AVE_sg]) 
+  const randomShape = Phaser.Math.RND.pick([DRON, GLOBO,GLOBO_sg, AVE, AVE_sg]) 
   const randomX = Phaser.Math.RND.between(0, 800);
 
   this.shapesGroup.create(randomX, 800, randomShape)
