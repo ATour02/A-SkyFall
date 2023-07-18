@@ -114,11 +114,11 @@ export default class Game2 extends Phaser.Scene {
 
     // creacion de obstaculos
     this.time.addEvent({
-      delay: 1000,
+      delay: 750,
       callback: this.addShape,
       callbackScope: this,
       loop: false,
-      repeat: 35,
+      repeat: 48,
     });
     this.time.addEvent({
       delay: 2500,
@@ -213,7 +213,7 @@ export default class Game2 extends Phaser.Scene {
       .setCircle(170, 130, 100)
       .setBounce(0.8)
       .setScale(0.23)
-      .setVelocityY(-230)
+      .setVelocityY(-250)
 
   }
   destroyShape(beam, shapeGroup) {

@@ -81,19 +81,19 @@ export default class TranTh extends Phaser.Scene {
     this.HscoreText.setText(
       this.Hscore
     );
-    if (this.finalScoreTh >= 2000) {
+    if (this.finalScoreTh >= 2500) {
       this.thSt.setVisible(true);
       this.stairs = 3;
     }
-    if (this.finalScoreTh < 2000 && this.finalScoreTh >= 1200) {
+    if (this.finalScoreTh < 2500 && this.finalScoreTh >= 1800) {
       this.twoSt.setVisible(true);
       this.stairs = 2;
     }
-    if (this.finalScoreTh < 1200 && this.finalScoreTh >= 300 ) {
+    if (this.finalScoreTh < 1800 && this.finalScoreTh >= 1000 ) {
       this.oneSt.setVisible(true);
       this.stairs = 1;
     }
-    if (this.finalScoreTh < 300 ) {
+    if (this.finalScoreTh < 1000 ) {
       this.noSt.setVisible(true);
       this.stairs = 0;
     }

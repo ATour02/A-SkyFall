@@ -114,11 +114,11 @@ const config = {
   
       // creacion de obstaculos
       this.time.addEvent({
-        delay: 1000,
+        delay: 500,
         callback: this.addShape,
         callbackScope: this,
         loop: false,
-        repeat: 35,
+        repeat: 77,
       });
       this.time.addEvent({
         delay: 2200,
