@@ -25,8 +25,9 @@ Mueve hacia los lados y esquiva los obstáculos, destrúyelos y obtendrás punto
 <br>
 <br>
 <i>`Links de acceso a los diferentes documentos`</i> <br>
+<br>
 <a href="https://drive.google.com/drive/u/0/folders/1GqdDHhGopDmfXyHcEwkNkkwVFZPConZE">-Acceso GDD y Documento de Concepto</a>
--
+
 
 
 
